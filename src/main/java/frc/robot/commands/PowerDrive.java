@@ -8,11 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 
 public class PowerDrive extends Command {
   public PowerDrive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.m_drive);
   }
 
   // Called just before this Command runs the first time
@@ -23,6 +26,9 @@ public class PowerDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    SmartDashboard.putString("DB/String 0", String.format("stick y:  %4.3f", Robot.m_oi.getStick().getY()));
+    SmartDashboard.putString("DB/String 1", String.format("stick twist:   %4.3f", Robot.m_oi.getStick().getTwist()));
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
