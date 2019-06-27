@@ -85,7 +85,7 @@ public class Drive extends Subsystem {
   }
 
   public void setPowerArcade(double forward, double turn) {
-    double max = Math.abs(forward) + Math.abs(forward);
+    double max = Math.abs(forward) + Math.abs(turn);
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);
     rightMaster.set(scale * (forward + turn));
     leftMaster.set(scale * (forward - turn));
