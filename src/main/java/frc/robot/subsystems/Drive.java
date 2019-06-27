@@ -88,7 +88,7 @@ public class Drive extends Subsystem {
     double max = Math.abs(forward) + Math.abs(forward);
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);
     rightMaster.set(scale * (forward + turn));
-    leftMaster.set(scale * (forward + turn));
+    leftMaster.set(scale * (forward - turn));
   
   
   

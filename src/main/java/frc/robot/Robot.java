@@ -32,8 +32,8 @@ public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   void displayDriveParameters() {
-    SmartDashboard.putString("DB/String 0", "stick y:" + m_oi.getStick().getY());
-    SmartDashboard.putString("DB/String 1", "stick twist:" + m_oi.getStick().getTwist());
+    SmartDashboard.putString("DB/String 0", String.format("stick y: %4.3f", m_oi.getStick().getY()));
+    SmartDashboard.putString("DB/String 1", String.format("stick twist: %4.3f", m_oi.getStick().getTwist()));
 }
  /**
    * This function is run when the robot is first started up and should be
@@ -46,6 +46,9 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    for (int i = 0; i < 10; i++) {
+      SmartDashboard.putString(String.format("DB/String %d",i), " ");
+    }
   }
 
   /**
