@@ -8,6 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.TimedDrive;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -16,10 +18,16 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 
   private final Joystick stick = new Joystick(0);
+
+  private final JoystickButton trigger = new JoystickButton(this.stick, 1);
   
   public Joystick getStick() {
     //method to be called by other commands or subsystems to use the joystick
     return (stick);
+  }
+
+  public OI(){
+    trigger.whenPressed(new TimedDrive(2));
   }
 
   //// CREATING BUTTONS
