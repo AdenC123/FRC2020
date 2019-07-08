@@ -11,5 +11,7 @@ package frc.robot;
  * Add your docs here.
  */
 public class Constants {
+    
+    //GAIN is used to limit the speed of PowerDrive
     public static double GAIN = 1.0;
 }

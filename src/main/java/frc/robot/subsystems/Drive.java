@@ -74,6 +74,7 @@ public class Drive extends Subsystem {
     leftSlave2.setNeutralMode(mode);
   }
 
+  // 2 commands to simply set the power of the left and right side of the robot
   public void setPower(double rightPower, double leftPower) {
     rightMaster.set(rightPower);
     leftMaster.set(leftPower);
@@ -84,6 +85,7 @@ public class Drive extends Subsystem {
     leftMaster.set(power);
   }
 
+  // Drive the robot using a joystick
   public void setPowerArcade(double forward, double turn) {
     double max = Math.abs(forward) + Math.abs(turn);
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);

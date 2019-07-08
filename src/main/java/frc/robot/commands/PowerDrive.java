@@ -30,17 +30,22 @@ public class PowerDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
+    // reverse stick values
     double stickY = - Robot.m_oi.getStick().getY();
     double stickTwist = - Robot.m_oi.getStick().getTwist();
-    
+
+    // print conditioned stick values    
     SmartDashboard.putString("DB/String 2", String.format("conditioned y: %4.3f", stickY));
     SmartDashboard.putString("DB/String 3", String.format("conditioned twist: %4.3f", stickTwist));
     
+    // limit power with the GAIN constant
     double powerForward = stickY * Constants.GAIN;
     double powerTwist = stickTwist * Constants.GAIN;
 
     Robot.m_drive.setPowerArcade(powerForward, powerTwist);
 
+    // print real power values
     SmartDashboard.putString("DB/String 5", String.format("powerForward %4.3f", powerForward));
     SmartDashboard.putString("DB/String 6", String.format("powertTwist: %4.3f", powerTwist));
   }

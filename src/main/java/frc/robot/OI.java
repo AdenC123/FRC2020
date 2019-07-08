@@ -17,12 +17,13 @@ import frc.robot.commands.TimedDrive;
  */
 public class OI {
 
+  //adding joystick and trigger
   private final Joystick stick = new Joystick(0);
 
   private final JoystickButton trigger = new JoystickButton(this.stick, 1);
   
+  //method to be called by other commands or subsystems to use the joystick
   public Joystick getStick() {
-    //method to be called by other commands or subsystems to use the joystick
     return (stick);
   }
 

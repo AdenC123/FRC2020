@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+  //function to display data about the robot
   void displayDriveParameters() {
     SmartDashboard.putString("DB/String 0", String.format("stick y: %4.3f", m_oi.getStick().getY()));
     SmartDashboard.putString("DB/String 1", String.format("stick twist: %4.3f", m_oi.getStick().getTwist()));
