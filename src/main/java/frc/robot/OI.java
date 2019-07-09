@@ -21,13 +21,17 @@ public class OI {
   private final Joystick stick = new Joystick(0);
 
   private final JoystickButton trigger = new JoystickButton(this.stick, 1);
+  private final JoystickButton sideButton = new JoystickButton(this.stick, 2);
   
   //method to be called by other commands or subsystems to use the joystick
   public Joystick getStick() {
     return (stick);
   }
 
-  
+  public OI(){
+    trigger.whenPressed(new TimedDrive(2.0, 0.5));
+    sideButton.whenPressed(Robot.m_drive.getDefaultCommand());
+  }
 
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a

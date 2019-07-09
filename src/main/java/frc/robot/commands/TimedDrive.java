@@ -16,14 +16,20 @@ public class TimedDrive extends Command {
   Timer timer = new Timer();
   private boolean isFinished;
   private double driveTime;
+  private double power;
 
-
-  public TimedDrive(double driveTime) {
+  /**
+   * Drive forward number of seconds.
+   * @param driveTime number of seconds to drive forward
+   * @param power power to run wheels at, between 0 and 1
+   */
+  public TimedDrive(double driveTime, double power) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     super();
     requires(Robot.m_drive);
     this.driveTime = driveTime;
+    this.power = power;
   }
 
   // Called just before this Command runs the first time
@@ -37,7 +43,7 @@ public class TimedDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_drive.setPower(0.5);
+    Robot.m_drive.setPower(power);
   }
 
   // Make this return true when this Command no longer needs to run execute()
