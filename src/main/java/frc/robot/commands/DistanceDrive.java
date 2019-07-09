@@ -9,37 +9,32 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.Drive;
 
-public class TimedDrive extends Command {
+public class DistanceDrive extends Command {
 
-  Timer timer = new Timer();
-  private boolean isFinished;
-  private double driveTime;
+  private double distance;
   private double power;
+  private double targetTicks;
 
   /**
-   * Drive forward number of seconds.
-   * @param driveTime number of seconds to drive forward
-   * @param power power to run wheels at, between 0 and 1
+   * Drive a certain distance
+   * @param distance Distance to travel in inches
+   * @param power Power between 0 and 1
    */
-  public TimedDrive(double driveTime, double power) {
+  public DistanceDrive(double distance, double power) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    super();
     requires(Robot.m_drive);
-    this.driveTime = driveTime;
+    this.distance = distance;
     this.power = power;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    timer.reset();
-    timer.start();
-    isFinished = false;
-    // reset encoders
     Robot.m_drive.resetEncoders();
+    targetTicks = distance * Drive.TICKS_PER_INCH;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -51,13 +46,12 @@ public class TimedDrive extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (timer.get() > driveTime) {
-      isFinished = true;
+    double averageCurrentTicks = (Robot.m_drive.getRightPosition() + Robot.m_drive.getLeftPosition()) / 2;
+    
+    if (averageCurrentTicks > targetTicks) {
+      return true;
     }
-    else {
-      isFinished = false;
-    }
-    return isFinished;
+    return false;
   }
 
   // Called once after isFinished returns true

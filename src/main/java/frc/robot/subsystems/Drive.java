@@ -17,20 +17,46 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
-/**
- * Add your docs here.
- */
+  /**
+   * Testing encoder values for 2 seconds at 0.5 speed Going about 83 inches
+   * forward <br/>
+   * 2133 right <br/>
+   * 2110 left <br/>
+   * 2122 average <br/>
+   * 25.57 ticks per inch <br/>
+   * <br/>
+   * 6 seconds at 0.5 speed <br/>
+   * Going 255 inches <br/>
+   * 6562 right <br/>
+   * 6500 left <br/>
+   * 6531 average <br/>
+   * 25.61 ticks per inch <br/>
+   * <br/>
+   * Same <br/>
+   * Drifted to the left <br/>
+   * 255 inches <br/>
+   * 6587 right <br/>
+   * 6483 left <br/>
+   * 6535 average <br/>
+   * 25.62 ticks per inch <br/>
+   * 25.6 ticks per inch average of all 3 tests <br/>
+   * 
+   * DistanceDrive for 240 inches, went 244 inches
+   * 6281 right
+   * 6209 left
+   */
+
 public class Drive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  final public WPI_TalonSRX
-    rightMaster = new WPI_TalonSRX(RobotMap.rightMaster),
-    rightSlave1 = new WPI_TalonSRX(RobotMap.rightSlave1),
-    rightSlave2 = new WPI_TalonSRX(RobotMap.rightSlave2),
-    leftMaster = new WPI_TalonSRX(RobotMap.leftMaster),
-    leftSlave1 = new WPI_TalonSRX(RobotMap.leftSlave1),
-    leftSlave2 = new WPI_TalonSRX(RobotMap.leftSlave2);
-  
+
+  static public final double TICKS_PER_INCH = 25.6;
+
+  final public WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.rightMaster),
+      rightSlave1 = new WPI_TalonSRX(RobotMap.rightSlave1), rightSlave2 = new WPI_TalonSRX(RobotMap.rightSlave2),
+      leftMaster = new WPI_TalonSRX(RobotMap.leftMaster), leftSlave1 = new WPI_TalonSRX(RobotMap.leftSlave1),
+      leftSlave2 = new WPI_TalonSRX(RobotMap.leftSlave2);
+
   public Drive() {
     super();
     // constructs and configures all six drive motors
@@ -56,16 +82,15 @@ public class Drive extends Subsystem {
     leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
   }
 
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new PowerDrive());
   }
-  
+
   public void setNeutralMode(NeutralMode mode) {
-    //method to easily set the neutral mode of all of the driveTrain motors
+    // method to easily set the neutral mode of all of the driveTrain motors
     rightMaster.setNeutralMode(mode);
     rightSlave1.setNeutralMode(mode);
     rightSlave2.setNeutralMode(mode);
@@ -91,5 +116,18 @@ public class Drive extends Subsystem {
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);
     rightMaster.set(scale * (forward + turn));
     leftMaster.set(scale * (forward - turn));
+  }
+
+  public double getRightPosition() {
+    return rightMaster.getSelectedSensorPosition();
+  }
+
+  public double getLeftPosition() {
+    return leftMaster.getSelectedSensorPosition();
+  }
+
+  public void resetEncoders() {
+    rightMaster.setSelectedSensorPosition(0, 0, 10);
+    leftMaster.setSelectedSensorPosition(0, 0, 10);
   }
 }

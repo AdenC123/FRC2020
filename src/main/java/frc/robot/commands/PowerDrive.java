@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
@@ -34,20 +34,22 @@ public class PowerDrive extends Command {
     // reverse stick values
     double stickY = - Robot.m_oi.getStick().getY();
     double stickTwist = - Robot.m_oi.getStick().getTwist();
+    double ySign = (stickY > 0.0) ? 1.0 : -1.0;
+    double twistSign = (stickTwist > 0.0) ? 1.0 : -1.0;
 
     // print conditioned stick values    
-    SmartDashboard.putString("DB/String 2", String.format("conditioned y: %4.3f", stickY));
-    SmartDashboard.putString("DB/String 3", String.format("conditioned twist: %4.3f", stickTwist));
+    //SmartDashboard.putString("DB/String 2", String.format("conditioned y: %4.3f", stickY));
+    //SmartDashboard.putString("DB/String 3", String.format("conditioned twist: %4.3f", stickTwist));
     
     // limit power with the GAIN constant
-    double powerForward = stickY * Constants.GAIN;
-    double powerTwist = stickTwist * Constants.GAIN;
+    double powerForward = Math.pow(Math.abs(stickY), Constants.SENSITIVITY) * ySign * Constants.GAIN;
+    double powerTwist = Math.pow(Math.abs(stickTwist), Constants.SENSITIVITY) * twistSign * Constants.GAIN;
 
     Robot.m_drive.setPowerArcade(powerForward, powerTwist);
 
     // print real power values
-    SmartDashboard.putString("DB/String 5", String.format("powerForward %4.3f", powerForward));
-    SmartDashboard.putString("DB/String 6", String.format("powertTwist: %4.3f", powerTwist));
+    //SmartDashboard.putString("DB/String 5", String.format("powerForward %4.3f", powerForward));
+    //SmartDashboard.putString("DB/String 6", String.format("powertTwist: %4.3f", powerTwist));
   }
 
   // Make this return true when this Command no longer needs to run execute()

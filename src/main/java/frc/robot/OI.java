@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.DistanceDrive;
 import frc.robot.commands.TimedDrive;
 
 /**
@@ -20,8 +21,9 @@ public class OI {
   //adding joystick and trigger
   private final Joystick stick = new Joystick(0);
 
-  private final JoystickButton trigger = new JoystickButton(this.stick, 1);
+  private final JoystickButton button11 = new JoystickButton(this.stick, 11);
   private final JoystickButton sideButton = new JoystickButton(this.stick, 2);
+  private final JoystickButton button12 = new JoystickButton(this.stick, 12);
   
   //method to be called by other commands or subsystems to use the joystick
   public Joystick getStick() {
@@ -29,8 +31,9 @@ public class OI {
   }
 
   public OI(){
-    trigger.whenPressed(new TimedDrive(2.0, 0.5));
+    //button11.whenPressed(new TimedDrive(6.0, 0.5));
     sideButton.whenPressed(Robot.m_drive.getDefaultCommand());
+    button12.whenPressed(new DistanceDrive(240, 0.5));
   }
 
   //// CREATING BUTTONS
