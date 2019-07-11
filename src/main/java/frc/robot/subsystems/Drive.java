@@ -151,6 +151,7 @@ public class Drive extends Subsystem {
     return rightMaster.getControlMode().value;
   }
 
+  // doesnt work
   public void setSpeedArcade(double forward, double turn) {
     double max = Math.abs(forward) + Math.abs(turn);
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);
