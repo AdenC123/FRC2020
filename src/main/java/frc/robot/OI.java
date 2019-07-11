@@ -10,7 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DistanceDrive;
-import frc.robot.commands.TimedDrive;
+import frc.robot.commands.ResetEncoders;
+import frc.robot.commands.AdjustSensitivity;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -24,6 +25,8 @@ public class OI {
   private final JoystickButton button11 = new JoystickButton(this.stick, 11);
   private final JoystickButton sideButton = new JoystickButton(this.stick, 2);
   private final JoystickButton button12 = new JoystickButton(this.stick, 12);
+  private final JoystickButton button6 = new JoystickButton(this.stick, 6);
+  private final JoystickButton button4 = new JoystickButton(this.stick, 4);
   
   //method to be called by other commands or subsystems to use the joystick
   public Joystick getStick() {
@@ -34,6 +37,10 @@ public class OI {
     //button11.whenPressed(new TimedDrive(6.0, 0.5));
     sideButton.whenPressed(Robot.m_drive.getDefaultCommand());
     button12.whenPressed(new DistanceDrive(240, 0.5));
+    button11.whenPressed(new ResetEncoders());
+
+    button6.whenPressed(new AdjustSensitivity(0.1));
+    button4.whenPressed(new AdjustSensitivity(-0.1));
   }
 
   //// CREATING BUTTONS
