@@ -38,6 +38,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("DB/String 2", String.format("right encoder: %4.3f", Robot.m_drive.getRightPosition()));
     SmartDashboard.putString("DB/String 3", String.format("left encoder: %4.3f", Robot.m_drive.getLeftPosition()));
     SmartDashboard.putString("DB/String 4", String.format("SENSITIVITY: %4.3f", Constants.SENSITIVITY));
+    SmartDashboard.putString("DB/String 5", String.format("right speed: %4.3f", Robot.m_drive.getRightSpeed()));
+    SmartDashboard.putString("DB/String 6", String.format("left speed: %4.3f", Robot.m_drive.getLeftSpeed()));
+    SmartDashboard.putString("DB/String 7", String.format("Control Mode: %d", Robot.m_drive.getControlMode()));
 }
  /**
    * This function is run when the robot is first started up and should be

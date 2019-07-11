@@ -17,4 +17,7 @@ public class Constants {
     
     //SENSITIVITY is the sensitivity of PowerDrive
     public static double SENSITIVITY = 2.0;
+
+    //MAX_SPEED 
+    public static final double MAX_SPEED = 230;
 }
