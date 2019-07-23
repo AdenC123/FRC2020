@@ -17,7 +17,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.commands.SpeedDrive;
+import frc.robot.commands.PowerDrive;
 
 /**
  * Testing encoder values for 2 seconds at 0.5 speed Going about 83 inches
@@ -94,7 +94,7 @@ public class Drive extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new SpeedDrive());
+    setDefaultCommand(new PowerDrive());
   }
 
   public void setNeutralMode(NeutralMode mode) {
