@@ -17,7 +17,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import frc.robot.commands.PowerDrive;
+import frc.robot.commands.SpeedDrive;
 
 /**
  * Testing encoder values for 2 seconds at 0.5 speed Going about 83 inches
@@ -80,11 +80,11 @@ public class Drive extends Subsystem {
     rightMaster.setInverted(InvertType.InvertMotorOutput);
     rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-    rightMaster.config_kP(0, .8);
+    rightMaster.config_kP(0, Constants.DRIVE_KP);
     rightMaster.config_kI(0, 0);
     rightMaster.config_kD(0, 0);
     rightMaster.setSensorPhase(false);
-    leftMaster.config_kP(0, .8);
+    leftMaster.config_kP(0, Constants.DRIVE_KP);
     leftMaster.config_kI(0, 0);
     leftMaster.config_kD(0, 0);
     leftMaster.setSensorPhase(false);
@@ -94,7 +94,7 @@ public class Drive extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new PowerDrive());
+    setDefaultCommand(new SpeedDrive());
   }
 
   public void setNeutralMode(NeutralMode mode) {
@@ -151,10 +151,14 @@ public class Drive extends Subsystem {
     return rightMaster.getControlMode().value;
   }
 
-  // doesnt work
+  // WIP
   public void setSpeedArcade(double forward, double turn) {
     double max = Math.abs(forward) + Math.abs(turn);
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);
+
+    rightMaster.config_kP(0, Constants.DRIVE_KP);
+    leftMaster.config_kP(0, Constants.DRIVE_KP);
+
     rightMaster.set(ControlMode.Velocity, (scale * (forward + turn)) * Constants.MAX_SPEED);
     leftMaster.set(ControlMode.Velocity, (scale * (forward - turn)) * Constants.MAX_SPEED);
   }

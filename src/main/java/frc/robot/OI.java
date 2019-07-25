@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DistanceDrive;
 import frc.robot.commands.ResetEncoders;
 import frc.robot.commands.AdjustSensitivity;
+import frc.robot.commands.AdjustkP;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -27,6 +28,8 @@ public class OI {
   private final JoystickButton button12 = new JoystickButton(this.stick, 12);
   private final JoystickButton button6 = new JoystickButton(this.stick, 6);
   private final JoystickButton button4 = new JoystickButton(this.stick, 4);
+  private final JoystickButton button5 = new JoystickButton(this.stick, 5);
+  private final JoystickButton button3 = new JoystickButton(this.stick, 3);
   
   //method to be called by other commands or subsystems to use the joystick
   public Joystick getStick() {
@@ -41,6 +44,8 @@ public class OI {
 
     button6.whenPressed(new AdjustSensitivity(0.1));
     button4.whenPressed(new AdjustSensitivity(-0.1));
+    button5.whenPressed(new AdjustkP(0.1));
+    button3.whenPressed(new AdjustkP(-0.1));
   }
 
   //// CREATING BUTTONS

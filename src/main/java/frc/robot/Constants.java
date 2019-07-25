@@ -12,12 +12,15 @@ package frc.robot;
  */
 public class Constants {
     
-    //GAIN is used to limit the speed of PowerDrive
+    // GAIN is used to limit the speed of PowerDrive
     public static final double GAIN = 1.0;
     
-    //SENSITIVITY is the sensitivity of PowerDrive
+    // SENSITIVITY is the sensitivity of PowerDrive
     public static double SENSITIVITY = 2.0;
 
-    //MAX_SPEED 
+    // MAX_SPEED 
     public static final double MAX_SPEED = 230;
+
+    // 
+    public static double DRIVE_KP = 2.0;
 }
