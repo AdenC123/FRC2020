@@ -13,6 +13,8 @@ import frc.robot.commands.DistanceDrive;
 import frc.robot.commands.ResetEncoders;
 import frc.robot.commands.AdjustSensitivity;
 import frc.robot.commands.AdjustkP;
+import frc.robot.commands.AdjustkI;
+import frc.robot.commands.AdjustIntegralZone;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -30,6 +32,10 @@ public class OI {
   private final JoystickButton button4 = new JoystickButton(this.stick, 4);
   private final JoystickButton button5 = new JoystickButton(this.stick, 5);
   private final JoystickButton button3 = new JoystickButton(this.stick, 3);
+  private final JoystickButton button10 = new JoystickButton(this.stick, 10);
+  private final JoystickButton button9 = new JoystickButton(this.stick, 9);
+  private final JoystickButton button7 = new JoystickButton(this.stick, 7);
+  private final JoystickButton button8 = new JoystickButton(this.stick, 8);
   
   //method to be called by other commands or subsystems to use the joystick
   public Joystick getStick() {
@@ -46,6 +52,11 @@ public class OI {
     button4.whenPressed(new AdjustSensitivity(-0.1));
     button5.whenPressed(new AdjustkP(0.1));
     button3.whenPressed(new AdjustkP(-0.1));
+    button9.whenPressed(new AdjustkI(-0.001));
+    button10.whenPressed(new AdjustkI(0.001));
+    button8.whenPressed(new AdjustIntegralZone(0.05));
+    button7.whenPressed(new AdjustIntegralZone(-0.05));
+
   }
 
   //// CREATING BUTTONS

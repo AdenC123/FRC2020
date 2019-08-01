@@ -33,15 +33,16 @@ public class Robot extends TimedRobot {
 
   //function to display data about the robot
   void displayDriveParameters() {
-    SmartDashboard.putString("DB/String 0", String.format("stick y: %4.3f", m_oi.getStick().getY()));
-    SmartDashboard.putString("DB/String 1", String.format("stick twist: %4.3f", m_oi.getStick().getTwist()));
+    SmartDashboard.putString("DB/String 0", String.format("target right: %4.3f", Robot.m_drive.getTargetRightSpeed()));
+    SmartDashboard.putString("DB/String 1", String.format("target left: %4.3f", Robot.m_drive.getTargetLeftSpeed()));
     SmartDashboard.putString("DB/String 2", String.format("right encoder: %4.3f", Robot.m_drive.getRightPosition()));
     SmartDashboard.putString("DB/String 3", String.format("left encoder: %4.3f", Robot.m_drive.getLeftPosition()));
     SmartDashboard.putString("DB/String 4", String.format("SENSITIVITY: %4.3f", Constants.SENSITIVITY));
     SmartDashboard.putString("DB/String 5", String.format("right speed: %4.3f", Robot.m_drive.getRightSpeed()));
     SmartDashboard.putString("DB/String 6", String.format("left speed: %4.3f", Robot.m_drive.getLeftSpeed()));
-    SmartDashboard.putString("DB/String 7", String.format("Control Mode: %d", Robot.m_drive.getControlMode()));
+    SmartDashboard.putString("DB/String 7", String.format("IntegralZone: %4.3f", Constants.INTEGRAL_ZONE));
     SmartDashboard.putString("DB/String 8", String.format("DRIVE_KP: %4.3f", Constants.DRIVE_KP));
+    SmartDashboard.putString("DB/String 9", String.format("DRIVE_KI: %4.3f", Constants.DRIVE_KI));
 }
  /**
    * This function is run when the robot is first started up and should be

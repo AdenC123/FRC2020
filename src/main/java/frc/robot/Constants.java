@@ -21,6 +21,9 @@ public class Constants {
     // MAX_SPEED 
     public static final double MAX_SPEED = 230;
 
-    // 
+    // PID loop stuff
     public static double DRIVE_KP = 2.0;
+    public static double DRIVE_KI = 0.0;
+
+    public static double INTEGRAL_ZONE = 0.5;
 }

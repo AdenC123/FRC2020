@@ -52,6 +52,9 @@ public class Drive extends Subsystem {
 
   static public final double TICKS_PER_INCH = 25.6;
 
+  private double targetLeftSpeed;
+  private double targetRightSpeed;
+
   final public WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.rightMaster),
       rightSlave1 = new WPI_TalonSRX(RobotMap.rightSlave1), rightSlave2 = new WPI_TalonSRX(RobotMap.rightSlave2),
       leftMaster = new WPI_TalonSRX(RobotMap.leftMaster), leftSlave1 = new WPI_TalonSRX(RobotMap.leftSlave1),
@@ -81,11 +84,13 @@ public class Drive extends Subsystem {
     rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     rightMaster.config_kP(0, Constants.DRIVE_KP);
-    rightMaster.config_kI(0, 0);
+    rightMaster.config_kI(0, Constants.DRIVE_KI);
+    rightMaster.config_IntegralZone(0, (int)(Constants.INTEGRAL_ZONE * Constants.MAX_SPEED));
     rightMaster.config_kD(0, 0);
     rightMaster.setSensorPhase(false);
     leftMaster.config_kP(0, Constants.DRIVE_KP);
-    leftMaster.config_kI(0, 0);
+    leftMaster.config_kI(0, Constants.DRIVE_KI);
+    leftMaster.config_IntegralZone(0, (int)(Constants.INTEGRAL_ZONE * Constants.MAX_SPEED));
     leftMaster.config_kD(0, 0);
     leftMaster.setSensorPhase(false);
   }
@@ -151,6 +156,19 @@ public class Drive extends Subsystem {
     return rightMaster.getControlMode().value;
   }
 
+  public void resetIntegral() {
+    rightMaster.setIntegralAccumulator(0);
+    leftMaster.setIntegralAccumulator(0);
+  }
+
+  public double getTargetRightSpeed() {
+    return targetRightSpeed;
+  }
+
+  public double getTargetLeftSpeed() {
+    return targetLeftSpeed;
+  }
+
   // WIP
   public void setSpeedArcade(double forward, double turn) {
     double max = Math.abs(forward) + Math.abs(turn);
@@ -158,8 +176,15 @@ public class Drive extends Subsystem {
 
     rightMaster.config_kP(0, Constants.DRIVE_KP);
     leftMaster.config_kP(0, Constants.DRIVE_KP);
+    rightMaster.config_kI(0, Constants.DRIVE_KI);
+    leftMaster.config_kI(0, Constants.DRIVE_KI);
+    rightMaster.config_IntegralZone(0, (int)(Constants.INTEGRAL_ZONE * Constants.MAX_SPEED));
+    leftMaster.config_IntegralZone(0, (int)(Constants.INTEGRAL_ZONE * Constants.MAX_SPEED));
 
-    rightMaster.set(ControlMode.Velocity, (scale * (forward + turn)) * Constants.MAX_SPEED);
-    leftMaster.set(ControlMode.Velocity, (scale * (forward - turn)) * Constants.MAX_SPEED);
+    targetRightSpeed = scale * (forward + turn) * Constants.MAX_SPEED;
+    targetLeftSpeed = scale * (forward - turn) * Constants.MAX_SPEED;
+    
+    rightMaster.set(ControlMode.Velocity, targetRightSpeed);
+    leftMaster.set(ControlMode.Velocity, targetLeftSpeed);
   }
 }
