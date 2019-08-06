@@ -7,20 +7,36 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class AdjustkP extends AdjusterBase {
+public abstract class AdjusterBase extends Command {
 
-  public AdjustkP(double deltakP) {
+  protected double delta;
+
+  public AdjusterBase(double delta) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    super(deltakP);
+    this.delta = delta;
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  // Called just before this Command runs the first time
   @Override
-  protected boolean isFinished() {
-    Constants.DRIVE_KP += delta;
-    return true;
+  protected void initialize() {
+  }
+
+  // Called repeatedly when this Command is scheduled to run
+  @Override
+  protected void execute() {
+  }
+
+  // Called once after isFinished returns true
+  @Override
+  protected void end() {
+  }
+
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  @Override
+  protected void interrupted() {
   }
 }

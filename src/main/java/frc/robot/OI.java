@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.DistanceDrive;
 import frc.robot.commands.ResetEncoders;
-import frc.robot.commands.AdjustSensitivity;
+//import frc.robot.commands.AdjustSensitivity;
+import frc.robot.commands.AdjustkF;
 import frc.robot.commands.AdjustkP;
 import frc.robot.commands.AdjustkI;
 import frc.robot.commands.AdjustIntegralZone;
@@ -48,8 +49,10 @@ public class OI {
     button12.whenPressed(new DistanceDrive(240, 0.5));
     button11.whenPressed(new ResetEncoders());
 
-    button6.whenPressed(new AdjustSensitivity(0.1));
-    button4.whenPressed(new AdjustSensitivity(-0.1));
+    //button6.whenPressed(new AdjustSensitivity(0.1));
+    //button4.whenPressed(new AdjustSensitivity(-0.1));
+    button6.whenPressed(new AdjustkF(0.1));
+    button4.whenPressed(new AdjustkF(-0.1));
     button5.whenPressed(new AdjustkP(0.1));
     button3.whenPressed(new AdjustkP(-0.1));
     button9.whenPressed(new AdjustkI(-0.001));

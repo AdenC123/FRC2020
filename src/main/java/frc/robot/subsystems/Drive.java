@@ -87,11 +87,13 @@ public class Drive extends Subsystem {
     rightMaster.config_kI(0, Constants.DRIVE_KI);
     rightMaster.config_IntegralZone(0, (int)(Constants.INTEGRAL_ZONE * Constants.MAX_SPEED));
     rightMaster.config_kD(0, 0);
+    rightMaster.config_kF(0, Constants.DRIVE_KF);
     rightMaster.setSensorPhase(false);
     leftMaster.config_kP(0, Constants.DRIVE_KP);
     leftMaster.config_kI(0, Constants.DRIVE_KI);
     leftMaster.config_IntegralZone(0, (int)(Constants.INTEGRAL_ZONE * Constants.MAX_SPEED));
     leftMaster.config_kD(0, 0);
+    leftMaster.config_kF(0, Constants.DRIVE_KF);
     leftMaster.setSensorPhase(false);
   }
 

@@ -37,7 +37,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("DB/String 1", String.format("target left: %4.3f", Robot.m_drive.getTargetLeftSpeed()));
     SmartDashboard.putString("DB/String 2", String.format("right encoder: %4.3f", Robot.m_drive.getRightPosition()));
     SmartDashboard.putString("DB/String 3", String.format("left encoder: %4.3f", Robot.m_drive.getLeftPosition()));
-    SmartDashboard.putString("DB/String 4", String.format("SENSITIVITY: %4.3f", Constants.SENSITIVITY));
+    //SmartDashboard.putString("DB/String 4", String.format("SENSITIVITY: %4.3f", Constants.SENSITIVITY));
+    SmartDashboard.putString("DB/String 4", String.format("DRIVE_KF: %4.3f", Constants.DRIVE_KF));
     SmartDashboard.putString("DB/String 5", String.format("right speed: %4.3f", Robot.m_drive.getRightSpeed()));
     SmartDashboard.putString("DB/String 6", String.format("left speed: %4.3f", Robot.m_drive.getLeftSpeed()));
     SmartDashboard.putString("DB/String 7", String.format("IntegralZone: %4.3f", Constants.INTEGRAL_ZONE));
