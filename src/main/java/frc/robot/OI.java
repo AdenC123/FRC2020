@@ -9,13 +9,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.DistanceDrive;
-import frc.robot.commands.ResetEncoders;
+//import frc.robot.commands.DistanceDrive;
+//import frc.robot.commands.ResetEncoders;
 //import frc.robot.commands.AdjustSensitivity;
 import frc.robot.commands.AdjustkF;
 import frc.robot.commands.AdjustkP;
 import frc.robot.commands.AdjustkI;
 import frc.robot.commands.AdjustIntegralZone;
+import frc.robot.commands.AdjustTurnSensitivity;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -46,9 +47,10 @@ public class OI {
   public OI(){
     //button11.whenPressed(new TimedDrive(6.0, 0.5));
     sideButton.whenPressed(Robot.m_drive.getDefaultCommand());
-    button12.whenPressed(new DistanceDrive(240, 0.5));
-    button11.whenPressed(new ResetEncoders());
-
+    //button12.whenPressed(new DistanceDrive(240, 0.5));
+    //button11.whenPressed(new ResetEncoders());
+    button12.whenPressed(new AdjustTurnSensitivity(0.1));
+    button11.whenPressed(new AdjustTurnSensitivity(-0.1));
     //button6.whenPressed(new AdjustSensitivity(0.1));
     //button4.whenPressed(new AdjustSensitivity(-0.1));
     button6.whenPressed(new AdjustkF(0.1));

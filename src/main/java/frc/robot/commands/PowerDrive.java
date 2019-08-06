@@ -43,7 +43,7 @@ public class PowerDrive extends Command {
     
     // limit power with the GAIN constant
     double powerForward = Math.pow(Math.abs(stickY), Constants.SENSITIVITY) * ySign * Constants.GAIN;
-    double powerTwist = Math.pow(Math.abs(stickTwist), Constants.SENSITIVITY) * twistSign * Constants.GAIN;
+    double powerTwist = Math.pow(Math.abs(stickTwist), Constants.SENSITIVITY) * twistSign * Constants.GAIN * Constants.TURN_SENSITIVITY;
 
     Robot.m_drive.setPowerArcade(powerForward, powerTwist);
 

@@ -18,12 +18,15 @@ public class Constants {
     // SENSITIVITY is the sensitivity of PowerDrive
     public static double SENSITIVITY = 2.0;
 
-    // MAX_SPEED 
+    // MAX_SPEED of motors for SpeedDrive
     public static final double MAX_SPEED = 230;
 
+    // TURN_SENSITIVITY
+    public static double TURN_SENSITIVITY = 0.7;
+
     // PID loop stuff
-    public static double DRIVE_KP = 0.0;
-    public static double DRIVE_KI = 0.0;
-    public static double DRIVE_KF = 0.0;
+    public static double DRIVE_KP = 2.0;
+    public static double DRIVE_KI = 0.003;
+    public static double DRIVE_KF = 4.0;
     public static double INTEGRAL_ZONE = 0.0;
 }
