@@ -171,6 +171,7 @@ public class Drive extends Subsystem {
 
   // WIP
   public void setSpeedArcade(double forward, double turn) {
+
     double max = Math.abs(forward) + Math.abs(turn);
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);
 
@@ -180,6 +181,8 @@ public class Drive extends Subsystem {
     leftMaster.config_kI(0, Constants.DRIVE_KI);
     rightMaster.config_IntegralZone(0, (int)(Constants.INTEGRAL_ZONE * Constants.MAX_SPEED));
     leftMaster.config_IntegralZone(0, (int)(Constants.INTEGRAL_ZONE * Constants.MAX_SPEED));
+    rightMaster.config_kF(0, Constants.DRIVE_KF);
+    leftMaster.config_kF(0, Constants.DRIVE_KF);
 
     targetRightSpeed = scale * (forward + turn) * Constants.MAX_SPEED;
     targetLeftSpeed = scale * (forward - turn) * Constants.MAX_SPEED;
