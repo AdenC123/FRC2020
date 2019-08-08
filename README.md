@@ -1,2 +1,3 @@
 Aden Cross
-Making code to drive the FRC robot.
+
+First FRC project, learning how to program the robot.
