@@ -15,6 +15,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Drive;
 //import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,6 +37,7 @@ public class Robot extends TimedRobot {
 
   //function to display data about the robot
   void displayDriveParameters() {
+    /*
     SmartDashboard.putString("DB/String 0", String.format("target right: %4.3f", Robot.m_drive.getTargetRightSpeed()));
     SmartDashboard.putString("DB/String 1", String.format("target left: %4.3f", Robot.m_drive.getTargetLeftSpeed()));
     SmartDashboard.putString("DB/String 2", String.format("right encoder: %4.3f", Robot.m_drive.getRightPosition()));
@@ -44,6 +49,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("DB/String 7", String.format("IntegralZone: %4.3f", Constants.INTEGRAL_ZONE));
     SmartDashboard.putString("DB/String 8", String.format("DRIVE_KP: %4.3f", Constants.DRIVE_KP));
     SmartDashboard.putString("DB/String 9", String.format("DRIVE_KI: %4.3f", Constants.DRIVE_KI));
+    */
 }
  /**
    * This function is run when the robot is first started up and should be
@@ -75,6 +81,25 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     displayDriveParameters();
+
+    // limelight
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    table.getEntry("ledMode").setNumber(3);  //1 is off, 2 is seizure mode, 3 is on
+    table.getEntry("camMode").setNumber(0);  //1 is driver mode (turns off vision processing)
+
+    NetworkTableEntry tx = table.getEntry("tx");
+    NetworkTableEntry ty = table.getEntry("ty");
+    NetworkTableEntry ta = table.getEntry("ta");
+
+    // read values periodically
+    double x = tx.getDouble(0.0);
+    double y = ty.getDouble(0.0);
+    double area = ta.getDouble(0.0);
+
+    // post to smart dashboard periodically
+    SmartDashboard.putString("DB/String 0", String.format("limelight x: %4.3f", x));
+    SmartDashboard.putString("DB/String 1", String.format("limelight y: %4.3f", y));
+    SmartDashboard.putString("DB/String 2", String.format("limelight area: %4.3f", area));
   }
 
   /**
