@@ -84,8 +84,9 @@ public class Robot extends TimedRobot {
 
     // limelight
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    table.getEntry("ledMode").setNumber(3);  //1 is off, 2 is seizure mode, 3 is on
-    table.getEntry("camMode").setNumber(0);  //1 is driver mode (turns off vision processing)
+    table.getEntry("ledMode").setNumber(1);  //1 is off, 2 is seizure mode, 3 is on
+    table.getEntry("camMode").setNumber(1);  //1 is driver mode (turns off vision processing)
+    //table.getEntry("pipeline").setNumber(0); // use pipeline 0
 
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
